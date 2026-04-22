@@ -1,14 +1,13 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <title>TEST CAMERA HUB</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- OBLIGATOIRE : chargement réel de la librairie -->
-  <script src="https://unpkg.com/html5-qrcode@2.3.8/minified/html5-qrcode.min.js"></script>
-</head>
+  <!-- ✅ CHARGEMENT CORRECT DE LA LIBRAIRIE -->
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/minified/html5-qrcode.min.jsead>
 
 <body style="text-align:center;font-family:Arial;">
   <h2>TEST CAMERA HUB</h2>
@@ -19,8 +18,8 @@
 
   <script>
     function startCamera() {
-      if (!window.Html5Qrcode) {
-        alert("❌ Librairie caméra non chargée");
+      if (typeof Html5Qrcode === "undefined") {
+        alert("❌ Librairie caméra NON chargée");
         return;
       }
 
@@ -30,12 +29,13 @@
         { facingMode: "environment" },
         { fps: 10 },
         () => {},
-        (err) => {}
-      ).catch(e => {
-        alert("❌ Erreur caméra : " + e);
+        () => {}
+      ).catch(error => {
+        alert("Erreur caméra : " + error);
       });
     }
   </script>
 </body>
 </html>
+
  
