@@ -3,39 +3,32 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>TEST CAMERA HUB</title>
+  <title>TEST CAMERA PUR</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
-  <!-- ✅ CHARGEMENT CORRECT DE LA LIBRAIRIE -->
-  <script src="https://unpkg.com/html5-qrcode@2.3.8/minified/html5-qrcode.min.jsead>
+<body style="text-align:center; font-family:Arial;">
+  <h2>TEST CAMERA PUR</h2>
 
-<body style="text-align:center;font-family:Arial;">
-  <h2>TEST CAMERA HUB</h2>
+  <button onclick="ouvrirCamera()">📷 Ouvrir la caméra</button>
 
-  <button onclick="startCamera()">📷 Ouvrir la caméra</button>
-
-  <div id="reader" style="width:300px;margin:20px auto;"></div>
+  <video id="video" autoplay playsinline style="width:300px;margin-top:20px;"></video>
 
   <script>
-    function startCamera() {
-      if (typeof Html5Qrcode === "undefined") {
-        alert("❌ Librairie caméra NON chargée");
-        return;
+    async function ouvrirCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: "environment" }
+        });
+        document.getElementById("video").srcObject = stream;
+      } catch (err) {
+        alert("❌ Caméra refusée : " + err.name);
       }
-
-      const scanner = new Html5Qrcode("reader");
-
-      scanner.start(
-        { facingMode: "environment" },
-        { fps: 10 },
-        () => {},
-        () => {}
-      ).catch(error => {
-        alert("Erreur caméra : " + error);
-      });
     }
   </script>
 </body>
 </html>
+``
+
 
  
