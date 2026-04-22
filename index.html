@@ -1,42 +1,41 @@
 
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>TEST CAMÉRA HUB</title>
+  <title>TEST CAMERA HUB</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Chargement garanti de la librairie -->
+  <!-- OBLIGATOIRE : chargement réel de la librairie -->
   <script src="https://unpkg.com/html5-qrcode@2.3.8/minified/html5-qrcode.min.js"></script>
 </head>
 
-<body style="text-align:center; font-family: Arial;">
-  <h2>TEST CAMÉRA HUB</h2>
+<body style="text-align:center;font-family:Arial;">
+  <h2>TEST CAMERA HUB</h2>
 
-  <button onclick="ouvrirCamera()">📷 Ouvrir la caméra</button>
+  <button onclick="startCamera()">📷 Ouvrir la caméra</button>
 
-  <div id="camera" style="width:300px; margin:20px auto;"></div>
+  <div id="reader" style="width:300px;margin:20px auto;"></div>
 
   <script>
-    function ouvrirCamera() {
+    function startCamera() {
       if (!window.Html5Qrcode) {
-        alert("Librairie caméra NON chargée");
+        alert("❌ Librairie caméra non chargée");
         return;
       }
 
-      const scanner = new Html5Qrcode("camera");
+      const scanner = new Html5Qrcode("reader");
 
       scanner.start(
         { facingMode: "environment" },
         { fps: 10 },
         () => {},
-        () => {}
-      ).catch(err => {
-        alert("Erreur caméra : " + err);
+        (err) => {}
+      ).catch(e => {
+        alert("❌ Erreur caméra : " + e);
       });
     }
   </script>
 </body>
 </html>
-
  
