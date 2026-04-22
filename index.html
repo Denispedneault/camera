@@ -1,13 +1,13 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <title>Scanner caméra</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- ✅ Chargement CORRECT de la librairie caméra -->
-  <script src="https://unpkg.com/html5-qrcode"></script>
+  <!-- ✅ LA SEULE BONNE FAÇON DE CHARGER LA LIBRAIRIE -->
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/minified/html5-qrcode.min.js"></script>
 </head>
 
 <body style="text-align:center;">
@@ -19,6 +19,11 @@
 
   <script>
     function start() {
+      if (typeof Html5Qrcode === "undefined") {
+        alert("ERREUR : la librairie caméra n'est pas chargée");
+        return;
+      }
+
       const qr = new Html5Qrcode("reader");
 
       qr.start(
@@ -28,10 +33,11 @@
           alert("Code lu : " + text);
           qr.stop();
         },
-        () => {}
+        (err) => {
+          // scan en cours, on ignore
+        }
       ).catch(e => alert("Erreur caméra : " + e));
     }
   </script>
 </body>
 </html>
-``
