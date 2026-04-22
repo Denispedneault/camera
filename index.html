@@ -10,6 +10,17 @@
 <body style="text-align:center; font-family:Arial;">
   <h2>TEST CAMERA PUR</h2>
 
+<label for="statut" style="font-size:16px;">Statut :</label><br>
+<select id="statut" style="font-size:16px; margin-top:5px;">
+  <option value="">-- Choisir --</option>
+  <option value="Fabriqué">Fabriqué</option>
+  <option value="Reçu">Reçu</option>
+  <option value="Installé">Installé</option>
+</select>
+
+<br><br>
+``
+
   <button onclick="ouvrirCamera()">📷 Ouvrir la caméra</button>
 
   <video id="video" autoplay playsinline style="width:300px;margin-top:20px;"></video>
