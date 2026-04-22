@@ -6,6 +6,7 @@
   <title>Scanner caméra</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- ✅ Chargement CORRECT de la librairie caméra -->
   <script src="https://unpkg.com/html5-qrcode"></script>
 </head>
 
@@ -28,7 +29,7 @@
           qr.stop();
         },
         () => {}
-      ).catch(e => alert(e));
+      ).catch(e => alert("Erreur caméra : " + e));
     }
   </script>
 </body>
