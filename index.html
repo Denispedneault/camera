@@ -17,27 +17,29 @@
 
   <div id="reader" style="width:300px;margin:20px auto;"></div>
 
-  <script>
-    function start() {
-      if (typeof Html5Qrcode === "undefined") {
-        alert("ERREUR : la librairie caméra n'est pas chargée");
-        return;
-      }
+<script>
+  function start() {
+    const qr = new Html5Qrcode("reader");
 
-      const qr = new Html5Qrcode("reader");
+    qr.start(
+      { facingMode: "environment" },
+      { fps: 10 },
+      (text) => {
 
-      qr.start(
-        { facingMode: "environment" },
-        { fps: 10 },
-        (text) => {
-          alert("Code lu : " + text);
-          qr.stop();
-        },
-        (err) => {
-          // scan en cours, on ignore
-        }
-      ).catch(e => alert("Erreur caméra : " + e));
-    }
-  </script>
-</body>
-</html>
+        // ENVOI DU CODE VERS GOOGLE SHEETS
+        fetch("https://script.google.com/macros/s/AKfycbwRmYeT446vNJivzB1t0UZnrKb_NqQZEMVeNzt2mb6WyD-AQ0_368L2gG2EYSCOVj68/exec", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ code: text })
+        });
+
+        alert("Code envoyé : " + text);
+        qr.stop();
+      },
+      () => {}
+    );
+  }
+</script>
+``
+
+ 
