@@ -3,43 +3,40 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Scanner caméra</title>
+  <title>TEST CAMÉRA HUB</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- ✅ LA SEULE BONNE FAÇON DE CHARGER LA LIBRAIRIE -->
+  <!-- Chargement garanti de la librairie -->
   <script src="https://unpkg.com/html5-qrcode@2.3.8/minified/html5-qrcode.min.js"></script>
 </head>
 
-<body style="text-align:center;">
-  <h2>Scanner QR</h2>
+<body style="text-align:center; font-family: Arial;">
+  <h2>TEST CAMÉRA HUB</h2>
 
-  <button onclick="start()">📷 Ouvrir la caméra</button>
+  <button onclick="ouvrirCamera()">📷 Ouvrir la caméra</button>
 
-  <div id="reader" style="width:300px;margin:20px auto;"></div>
+  <div id="camera" style="width:300px; margin:20px auto;"></div>
 
-<script>
-  function start() {
-    const qr = new Html5Qrcode("reader");
+  <script>
+    function ouvrirCamera() {
+      if (!window.Html5Qrcode) {
+        alert("Librairie caméra NON chargée");
+        return;
+      }
 
-    qr.start(
-      { facingMode: "environment" },
-      { fps: 10 },
-      (text) => {
+      const scanner = new Html5Qrcode("camera");
 
-        // ENVOI DU CODE VERS GOOGLE SHEETS
-        fetch("https://script.google.com/macros/s/AKfycbwRmYeT446vNJivzB1t0UZnrKb_NqQZEMVeNzt2mb6WyD-AQ0_368L2gG2EYSCOVj68/exec", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ code: text })
-        });
-
-        alert("Code envoyé : " + text);
-        qr.stop();
-      },
-      () => {}
-    );
-  }
-</script>
-``
+      scanner.start(
+        { facingMode: "environment" },
+        { fps: 10 },
+        () => {},
+        () => {}
+      ).catch(err => {
+        alert("Erreur caméra : " + err);
+      });
+    }
+  </script>
+</body>
+</html>
 
  
