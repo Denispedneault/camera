@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Scanner caméra</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  https://unpkg.com/html5-qrcode
+</head>
+
+<body style="text-align:center;">
+  <h2>Scanner QR</h2>
+
+  <button onclick="start()">📷 Ouvrir la caméra</button>
+
+  <div id="reader" style="width:300px;margin:20px auto;"></div>
+
+  <script>
+    function start() {
+      const qr = new Html5Qrcode("reader");
+
+      qr.start(
+        { facingMode: "environment" },
+        { fps: 10 },
+        (text) => {
+          alert("Code lu : " + text);
+          qr.stop();
+        },
+        () => {}
+      ).catch(e => alert(e));
+    }
+  </script>
+</body>
+</html>
+``
